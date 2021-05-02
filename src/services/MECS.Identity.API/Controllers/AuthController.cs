@@ -1,4 +1,5 @@
 ﻿using MECS.Core.Domain.Entities;
+using MECS.Core.Helpers;
 using MECS.Identity.API.Extensions;
 using MECS.Identity.API.Models;
 using Microsoft.AspNetCore.Identity;
@@ -14,9 +15,8 @@ using System.Threading.Tasks;
 
 namespace MECS.Identity.API.Controllers
 {
-    [ApiController]
     [Route("api/identity")]
-    public class AuthController : Controller
+    public class AuthController : MainController
     {
 
         private readonly SignInManager<IdentityUser> __signInManager;
@@ -37,7 +37,7 @@ namespace MECS.Identity.API.Controllers
         {
             var signUpUser = signUpUserViewModel.ConvertToEntity();
             if (!signUpUser.IsValid())
-                return BadRequest();
+                return CustomResponse(signUpUser);
 
             var user = new IdentityUser
             {
@@ -45,15 +45,19 @@ namespace MECS.Identity.API.Controllers
                 Email = signUpUser.Email,
                 EmailConfirmed = true
             };
-
             var result = await _userManager.CreateAsync(user, signUpUser.Password);
 
-            if (!result.Succeeded)
-                return BadRequest();
+            if (result.Succeeded)
+            {
+                var token = await GenerateJWT(user.Email);
+                return CustomResponse(token);
+            }
 
-            await __signInManager.SignInAsync(user, false);
-
-            return Ok(await GenerateJWT(user.Email));
+            foreach (var erro in result.Errors)
+            {
+                AdicionarErroProcessamento(erro.Description);
+            }
+            return CustomResponse();
         }
 
         [HttpPost("sign-in")]
@@ -61,14 +65,22 @@ namespace MECS.Identity.API.Controllers
         {
             var signInUser = signInUserViewModel.ConvertToEntity();
             if (!signInUser.IsValid())
-                return BadRequest();
+                return CustomResponse(signInUser);
 
             var result = await __signInManager.PasswordSignInAsync(signInUser.Email, signInUser.Password, false, true);
 
-            if (!result.Succeeded)
-                return BadRequest();
+            if (result.Succeeded)
+            {
+                return CustomResponse(await GenerateJWT(signInUser.Email));
+            }
 
-            return Ok(await GenerateJWT(signInUser.Email));
+            if (result.IsLockedOut)
+            {
+                AdicionarErroProcessamento("Usuário temporariamente bloqueado por tentativas inválidas.");
+                return CustomResponse();
+            }
+            AdicionarErroProcessamento("Usuário ou senha incorretos.");
+            return CustomResponse();
         }
         private async Task<SignInUserResponse> GenerateJWT(string email)
         {
@@ -79,8 +91,8 @@ namespace MECS.Identity.API.Controllers
             claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
             claims.Add(new Claim(JwtRegisteredClaimNames.Email, user.Email));
             claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, ToUnixEpochDate(DateTime.UtcNow).ToString()));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(DateTime.UtcNow).ToString(), ClaimValueTypes.Integer64));
+            claims.Add(new Claim(JwtRegisteredClaimNames.Nbf, DateTime.UtcNow.ToUnixEpochDate().ToString()));
+            claims.Add(new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToUnixEpochDate().ToString(), ClaimValueTypes.Integer64));
 
             foreach (var userRole in userRoles)
             {
@@ -120,7 +132,6 @@ namespace MECS.Identity.API.Controllers
 
             return response;
         }
-        private static long ToUnixEpochDate(DateTime date)
-            => (long) Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
+
     }
 }
