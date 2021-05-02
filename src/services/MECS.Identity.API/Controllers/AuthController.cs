@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -86,6 +87,15 @@ namespace MECS.Identity.API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(email);
             var claims = await _userManager.GetClaimsAsync(user);
+
+            var identityClaims = await ObterClaimsUsuario(claims, user);
+
+            var encodedToken = CodificarToken(identityClaims);
+
+            return ObterRespostaToken(encodedToken, user, claims);
+        }
+        private async Task<ClaimsIdentity> ObterClaimsUsuario(ICollection<Claim> claims, IdentityUser user)
+        {
             var userRoles = await _userManager.GetRolesAsync(user);
 
             claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
@@ -101,7 +111,10 @@ namespace MECS.Identity.API.Controllers
 
             var identityClaims = new ClaimsIdentity();
             identityClaims.AddClaims(claims);
-
+            return identityClaims;
+        }
+        private string CodificarToken(ClaimsIdentity claims)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -110,12 +123,15 @@ namespace MECS.Identity.API.Controllers
             {
                 Issuer = _appSettings.Issuer,
                 Audience = _appSettings.Audience,
-                Subject = identityClaims,
+                Subject = claims,
                 Expires = DateTime.UtcNow.AddHours(_appSettings.ExpirationHours),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             });
 
-            var encodedToken = tokenHandler.WriteToken(token);
+            return tokenHandler.WriteToken(token);
+        }
+        private SignInUserResponse ObterRespostaToken(string encodedToken, IdentityUser user, IEnumerable<Claim> claims)
+        {
 
             var response = new SignInUserResponse
             {
@@ -128,8 +144,6 @@ namespace MECS.Identity.API.Controllers
                     Claims = claims.Select(x => new UserClaim { Type = x.Type, Value = x.Value })
                 }
             };
-
-
             return response;
         }
 
