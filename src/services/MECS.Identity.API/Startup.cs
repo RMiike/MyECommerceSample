@@ -1,5 +1,6 @@
 using MECS.Core.Domain.Entities;
 using MECS.Identity.API.Data;
+using MECS.Identity.API.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,7 @@ namespace MECS.Identity.API
             opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>()
+                    .AddErrorDescriber<IdentityMensagensPortugues>()
                     .AddRoles<IdentityRole>()
                     .AddEntityFrameworkStores<ApplicationDbContext>()
                     .AddDefaultTokenProviders();
