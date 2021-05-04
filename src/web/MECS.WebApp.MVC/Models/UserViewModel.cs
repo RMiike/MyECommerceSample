@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MECS.WebApp.MVC.Models
 {
-
     public class SignUpUserViewModel
     {
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]

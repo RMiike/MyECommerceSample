@@ -1,4 +1,5 @@
-﻿using MECS.WebApp.MVC.Models;
+﻿using MECS.WebApp.MVC.Interfaces;
+using MECS.WebApp.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -6,6 +7,14 @@ namespace MECS.WebApp.MVC.Controllers
 {
     public class IdentityController : Controller
     {
+
+        private readonly IAuthService _authService;
+
+        public IdentityController(IAuthService authService)
+        {
+            _authService = authService;
+        }
+
         [HttpGet]
         [Route("sign-up")]
         public IActionResult SignUp()
@@ -21,6 +30,7 @@ namespace MECS.WebApp.MVC.Controllers
                 return View(signUpUserViewModel);
             }
 
+            var response = await _authService.SignUp(signUpUserViewModel);
 
             if (false)
             {
@@ -45,6 +55,7 @@ namespace MECS.WebApp.MVC.Controllers
                 return View(signInUserViewModel);
             }
 
+            var response = await _authService.SignIn(signInUserViewModel);
 
             if (false)
             {
