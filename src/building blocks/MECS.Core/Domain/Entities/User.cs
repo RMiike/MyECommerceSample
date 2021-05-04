@@ -1,5 +1,4 @@
 ﻿using MECS.Core.Domain.Validatiors;
-using System.Collections.Generic;
 
 namespace MECS.Core.Domain.Entities
 {
@@ -38,23 +37,4 @@ namespace MECS.Core.Domain.Entities
         }
     }
 
-
-    public class SignInUserResponse
-    {
-        public string AccessToken { get; set; }
-        public double ExpiresIn { get; set; }
-        public UserToken UserToken { get; set; }
-    }
-
-    public class UserToken
-    {
-        public string Id { get; set; }
-        public string Email { get; set; }
-        public IEnumerable<UserClaim> Claims { get; set; }
-    }
-    public class UserClaim
-    {
-        public string Value { get; set; }
-        public string Type { get; set; }
-    }
 }

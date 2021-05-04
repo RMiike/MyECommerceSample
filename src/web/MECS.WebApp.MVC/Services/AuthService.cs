@@ -1,6 +1,5 @@
 ﻿using MECS.WebApp.MVC.Interfaces;
 using MECS.WebApp.MVC.Models;
-using System;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -18,7 +17,7 @@ namespace MECS.WebApp.MVC.Services
             _httpClient = httpClient;
         }
 
-        public async Task<string> SignIn(SignInUserViewModel signInUserViewModel)
+        public async Task<SignInUserResponse> SignIn(SignInUserViewModel signInUserViewModel)
         {
             var loginContent = new StringContent(
                 JsonSerializer.Serialize(signInUserViewModel),
@@ -27,10 +26,14 @@ namespace MECS.WebApp.MVC.Services
 
             var response = await _httpClient.PostAsync("https://localhost:44374/api/identity/sign-in", loginContent);
 
-            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
+            var opt = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            return JsonSerializer.Deserialize<SignInUserResponse>(await response.Content.ReadAsStringAsync(), opt);
         }
 
-        public async Task<string> SignUp(SignUpUserViewModel signUpUserViewModel)
+        public async Task<SignInUserResponse> SignUp(SignUpUserViewModel signUpUserViewModel)
         {
             var registerContent = new StringContent(
                JsonSerializer.Serialize(signUpUserViewModel),
@@ -38,8 +41,11 @@ namespace MECS.WebApp.MVC.Services
                "application/json");
 
             var response = await _httpClient.PostAsync("https://localhost:44374/api/identity/sign-up", registerContent);
-
-            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
+            var opt = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            return JsonSerializer.Deserialize<SignInUserResponse>(await response.Content.ReadAsStringAsync(), opt);
         }
     }
 }

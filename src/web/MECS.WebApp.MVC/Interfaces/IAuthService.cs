@@ -5,7 +5,7 @@ namespace MECS.WebApp.MVC.Interfaces
 {
     public interface IAuthService
     {
-        Task<string> SignIn(SignInUserViewModel signInUserViewModel);
-        Task<string> SignUp(SignUpUserViewModel signUpUserViewModel);
+        Task<SignInUserResponse> SignIn(SignInUserViewModel signInUserViewModel);
+        Task<SignInUserResponse> SignUp(SignUpUserViewModel signUpUserViewModel);
     }
 }
