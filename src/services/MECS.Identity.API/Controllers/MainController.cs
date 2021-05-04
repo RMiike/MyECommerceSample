@@ -20,7 +20,7 @@ namespace MECS.Identity.API.Controllers
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
             {
-                {operationTitle,Erros.ToArray() }
+                {operationTitle,Erros.ToArray() },
             }));
         }
         protected ActionResult CustomResponse(ModelStateDictionary modelState)
@@ -34,7 +34,9 @@ namespace MECS.Identity.API.Controllers
         }
         protected ActionResult CustomResponse(BaseEntity baseEntity)
         {
+
             var erros = baseEntity.ErrorMessages;
+
             foreach (var erro in erros)
             {
                 AdicionarErroProcessamento(erro);
@@ -51,7 +53,7 @@ namespace MECS.Identity.API.Controllers
         {
             Erros.Add(erro);
         }
-        
+
         protected void LimparErrosProcessamento()
         {
             Erros.Clear();

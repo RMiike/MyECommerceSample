@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Identity\" />
+    <ProjectReference Include="..\..\building blocks\MECS.Core\MECS.Core.csproj" />
   </ItemGroup>
 
 </Project>
