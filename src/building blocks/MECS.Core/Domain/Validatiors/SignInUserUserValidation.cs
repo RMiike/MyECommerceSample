@@ -19,6 +19,8 @@ namespace MECS.Core.Domain.Validatiors
                 .NotNull()
                 .WithMessage("O campo Password é obrigatório.")
                 .Length(PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH)
+                .WithMessage($"O Campo Password deve ter entre {PASSWORD_MIN_LENGTH} e {PASSWORD_MAX_LENGTH} caracteres.")
+                 .Length(PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH)
                 .WithMessage($"O Campo Password deve ter entre {PASSWORD_MIN_LENGTH} e {PASSWORD_MAX_LENGTH} caracteres.");
         }
     }
