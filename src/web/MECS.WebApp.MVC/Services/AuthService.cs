@@ -47,5 +47,6 @@ namespace MECS.WebApp.MVC.Services
             };
             return JsonSerializer.Deserialize<SignInUserResponse>(await response.Content.ReadAsStringAsync(), opt);
         }
+
     }
 }
