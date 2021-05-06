@@ -10,6 +10,10 @@ namespace MECS.WebApp.MVC.Controllers
         {
             if (response != null && response.Errors.Messages.Any())
             {
+                foreach (var message in response.Errors.Messages)
+                {
+                    ModelState.AddModelError(string.Empty, message);
+                }
                 return true;
             }
             return false;
