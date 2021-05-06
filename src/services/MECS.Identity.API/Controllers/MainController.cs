@@ -16,7 +16,7 @@ namespace MECS.Identity.API.Controllers
             {
                 return Ok(result);
             }
-            var operationTitle = "Mensagens";
+            var operationTitle = "Messages";
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
             {

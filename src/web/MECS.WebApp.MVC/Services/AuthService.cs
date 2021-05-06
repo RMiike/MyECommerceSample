@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MECS.WebApp.MVC.Services
 {
-    public class AuthService : IAuthService
+    public class AuthService : Service, IAuthService
     {
 
         private readonly HttpClient _httpClient;
@@ -30,6 +30,16 @@ namespace MECS.WebApp.MVC.Services
             {
                 PropertyNameCaseInsensitive = true
             };
+
+            if (!TreateErrorsResponse(response))
+            {
+                return new SignInUserResponse
+                {
+                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), opt)
+                };
+            }
+
+
             return JsonSerializer.Deserialize<SignInUserResponse>(await response.Content.ReadAsStringAsync(), opt);
         }
 
@@ -45,6 +55,16 @@ namespace MECS.WebApp.MVC.Services
             {
                 PropertyNameCaseInsensitive = true
             };
+
+            if (!TreateErrorsResponse(response))
+            {
+                return new SignInUserResponse
+                {
+                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), opt)
+                };
+            }
+
+
             return JsonSerializer.Deserialize<SignInUserResponse>(await response.Content.ReadAsStringAsync(), opt);
         }
 
