@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MECS.WebApp.MVC.Controllers
 {
-    public class IdentityController : Controller
+    public class IdentityController : MainController
     {
 
         private readonly IAuthService _authService;
@@ -38,10 +38,10 @@ namespace MECS.WebApp.MVC.Controllers
 
             var response = await _authService.SignUp(signUpUserViewModel);
 
-            //if (false)
-            //{
-            //    return View(signUpUserViewModel);
-            //}
+            if (ResponseHaveErrors(response.ResponseResult))
+            {
+                return View(signUpUserViewModel);
+            }
             await SignIn(response);
 
 
@@ -64,10 +64,10 @@ namespace MECS.WebApp.MVC.Controllers
 
             var response = await _authService.SignIn(signInUserViewModel);
 
-            //if (false)
-            //{
-            //    return View(signInUserViewModel);
-            //}
+            if (ResponseHaveErrors(response.ResponseResult))
+            {
+                return View(signInUserViewModel);
+            }
 
             await SignIn(response);
 
@@ -93,7 +93,7 @@ namespace MECS.WebApp.MVC.Controllers
             {
                 ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
                 IsPersistent = true
-            
+
             };
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
