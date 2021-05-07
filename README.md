@@ -14,6 +14,16 @@
   <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=15C3D6&labelColor=000000">
 </p>
 
+
+<p align="center">
+    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/RMiike/MyECommerceSample?style=plastic">
+    <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/RMiike/MyEcommerceSample">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/RMiike/MyECommerceSample">
+    <img src="https://app.codacy.com/project/badge/Grade/daea9fe8ea2348f193d9279f64a5d75b"/>
+    <img src="https://www.travis-ci.com/RMiike/MyECommerceSample.svg?branch=master" alt="Build Status" />
+</p>
+
+
 <br>
 
 <p align="center">
