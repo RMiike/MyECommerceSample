@@ -49,14 +49,16 @@ namespace MECS.WebApp.MVC.Controllers
         }
         [HttpGet]
         [Route("sign-in")]
-        public IActionResult SignIn()
+        public IActionResult SignIn(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
         [HttpPost]
         [Route("sign-in")]
-        public async Task<IActionResult> SignIn(SignInUserViewModel signInUserViewModel)
+        public async Task<IActionResult> SignIn(SignInUserViewModel signInUserViewModel, string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             if (!ModelState.IsValid)
             {
                 return View(signInUserViewModel);
@@ -71,7 +73,9 @@ namespace MECS.WebApp.MVC.Controllers
 
             await SignIn(response);
 
-            return RedirectToAction("Index", "Home");
+            return string.IsNullOrEmpty(returnUrl) ?
+                RedirectToAction("Index", "Home") :
+                LocalRedirect(returnUrl);
         }
         [HttpGet]
         [Route("logout")]
