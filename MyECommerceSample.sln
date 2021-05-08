@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MECS.Payment.API", "src\ser
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{BA75BB66-F6E8-4C0C-87E1-0B90B54C0F0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MECS.Tests", "tests\MECS.Tests\MECS.Tests.csproj", "{ADA1827B-518A-4F2E-953F-F2E597EAD86F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MECS.Tests", "tests\MECS.Tests\MECS.Tests.csproj", "{ADA1827B-518A-4F2E-953F-F2E597EAD86F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
