@@ -11,14 +11,12 @@ namespace MECS.WebApp.MVC.Services
     public class AuthService : Service, IAuthService
     {
         private readonly HttpClient _httpClient;
-
         public AuthService(HttpClient httpClient,
-                          IOptions<AppSettings> appSettings)
+                  IOptions<AppSettings> appSettings)
         {
             httpClient.BaseAddress = new Uri(appSettings.Value.AuthUrl);
             _httpClient = httpClient;
         }
-
         public async Task<SignInUserResponse> SignIn(SignInUserViewModel signInUserViewModel)
         {
             var loginContent = GetContent(signInUserViewModel);
@@ -32,7 +30,6 @@ namespace MECS.WebApp.MVC.Services
             }
             return await DeserializeObjectResponse<SignInUserResponse>(response);
         }
-
         public async Task<SignInUserResponse> SignUp(SignUpUserViewModel signUpUserViewModel)
         {
             var registerContent = GetContent(signUpUserViewModel);
