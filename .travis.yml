@@ -1,5 +1,8 @@
 language: csharp
 dotnet: 5.0
+branches:
+  only: 
+    - master
 sudo: false
 env:
   global:
@@ -7,6 +10,6 @@ env:
 script:
   - dotnet build ./MyECommerceSample.sln
 
-  - dotnet test ./Back-End /p:CollectCoverage=true /p:ExcludeByFile=\"**/Migrations/*.cs,**/Startup.cs,**/Program.cs\"  /p:CoverletOutputFormat=opencover
+  - dotnet test /p:CollectCoverage=true /p:ExcludeByFile=\"**/Migrations/*.cs,**/Startup.cs,**/Program.cs\"  /p:CoverletOutputFormat=opencover
   after_script:
   - bash <(curl -s https://codecov.io/bash) -t 528792f8-c73c-477d-a4dc-f1382832f9e9
