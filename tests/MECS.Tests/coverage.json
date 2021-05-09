@@ -1,0 +1,461 @@
+{
+  "MECS.Core.dll": {
+    "C:\\Users\\miike\\source\\repos\\MyECommerceSample\\src\\building blocks\\MECS.Core\\Helpers\\GeneralExtensions.cs": {
+      "MECS.Core.Helpers.GeneralExtensions": {
+        "System.Int64 MECS.Core.Helpers.GeneralExtensions::ToUnixEpochDate(System.DateTime)": {
+          "Lines": {
+            "8": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\miike\\source\\repos\\MyECommerceSample\\src\\building blocks\\MECS.Core\\Domain\\Validatiors\\ProductsValidation.cs": {
+      "MECS.Core.Domain.Validatiors.ProductsValidation": {
+        "System.Void MECS.Core.Domain.Validatiors.ProductsValidation::.ctor()": {
+          "Lines": {
+            "8": 0,
+            "9": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "30": 0,
+            "31": 0,
+            "32": 0,
+            "33": 0,
+            "34": 0,
+            "35": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\miike\\source\\repos\\MyECommerceSample\\src\\building blocks\\MECS.Core\\Domain\\Validatiors\\SignInUserUserValidation.cs": {
+      "MECS.Core.Domain.Validatiors.SignInUserUserValidation": {
+        "System.Void MECS.Core.Domain.Validatiors.SignInUserUserValidation::.ctor()": {
+          "Lines": {
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\miike\\source\\repos\\MyECommerceSample\\src\\building blocks\\MECS.Core\\Domain\\Validatiors\\SignUpUserValidation.cs": {
+      "MECS.Core.Domain.Validatiors.SignUpUserValidation": {
+        "System.Void MECS.Core.Domain.Validatiors.SignUpUserValidation::.ctor()": {
+          "Lines": {
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0,
+            "13": 0,
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0,
+            "22": 0,
+            "23": 0,
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\miike\\source\\repos\\MyECommerceSample\\src\\building blocks\\MECS.Core\\Domain\\Entities\\AppSettings.cs": {
+      "MECS.Core.Domain.Entities.AppSettings": {
+        "System.String MECS.Core.Domain.Entities.AppSettings::get_Secret()": {
+          "Lines": {
+            "5": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 MECS.Core.Domain.Entities.AppSettings::get_ExpirationHours()": {
+          "Lines": {
+            "6": 0
+          },
+          "Branches": []
+        },
+        "System.String MECS.Core.Domain.Entities.AppSettings::get_Issuer()": {
+          "Lines": {
+            "7": 0
+          },
+          "Branches": []
+        },
+        "System.String MECS.Core.Domain.Entities.AppSettings::get_Audience()": {
+          "Lines": {
+            "8": 2
+          },
+          "Branches": []
+        },
+        "System.String MECS.Core.Domain.Entities.AppSettings::get_AuthUrl()": {
+          "Lines": {
+            "9": 0
+          },
+          "Branches": []
+        },
+        "System.String MECS.Core.Domain.Entities.AppSettings::get_CatalogUrl()": {
+          "Lines": {
+            "10": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\miike\\source\\repos\\MyECommerceSample\\src\\building blocks\\MECS.Core\\Domain\\Entities\\BaseEntity.cs": {
+      "MECS.Core.Domain.Entities.BaseEntity": {
+        "System.Guid MECS.Core.Domain.Entities.BaseEntity::get_Id()": {
+          "Lines": {
+            "9": 0
+          },
+          "Branches": []
+        },
+        "FluentValidation.Results.ValidationResult MECS.Core.Domain.Entities.BaseEntity::get_ValidationResult()": {
+          "Lines": {
+            "10": 0
+          },
+          "Branches": []
+        },
+        "System.String[] MECS.Core.Domain.Entities.BaseEntity::get_ErrorMessages()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": [
+            {
+              "Line": 11,
+              "Offset": 7,
+              "EndOffset": 9,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 7,
+              "EndOffset": 13,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 19,
+              "EndOffset": 21,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 11,
+              "Offset": 19,
+              "EndOffset": 25,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Boolean MECS.Core.Domain.Entities.BaseEntity::op_Equality(MECS.Core.Domain.Entities.BaseEntity,MECS.Core.Domain.Entities.BaseEntity)": {
+          "Lines": {
+            "14": 0,
+            "15": 0,
+            "16": 0,
+            "17": 0,
+            "18": 0,
+            "19": 0,
+            "20": 0
+          },
+          "Branches": [
+            {
+              "Line": 15,
+              "Offset": 2,
+              "EndOffset": 4,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 15,
+              "Offset": 2,
+              "EndOffset": 10,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 15,
+              "Offset": 13,
+              "EndOffset": 15,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 15,
+              "Offset": 13,
+              "EndOffset": 19,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 20,
+              "EndOffset": 22,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 20,
+              "EndOffset": 28,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 31,
+              "EndOffset": 33,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 0
+            },
+            {
+              "Line": 17,
+              "Offset": 31,
+              "EndOffset": 37,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Boolean MECS.Core.Domain.Entities.BaseEntity::op_Inequality(MECS.Core.Domain.Entities.BaseEntity,MECS.Core.Domain.Entities.BaseEntity)": {
+          "Lines": {
+            "22": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean MECS.Core.Domain.Entities.BaseEntity::Equals(System.Object)": {
+          "Lines": {
+            "24": 0,
+            "25": 0,
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "31": 0,
+            "32": 0
+          },
+          "Branches": [
+            {
+              "Line": 26,
+              "Offset": 14,
+              "EndOffset": 16,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 0
+            },
+            {
+              "Line": 26,
+              "Offset": 14,
+              "EndOffset": 20,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 0
+            },
+            {
+              "Line": 28,
+              "Offset": 26,
+              "EndOffset": 28,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 0
+            },
+            {
+              "Line": 28,
+              "Offset": 26,
+              "EndOffset": 32,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 0
+            }
+          ]
+        },
+        "System.Int32 MECS.Core.Domain.Entities.BaseEntity::GetHashCode()": {
+          "Lines": {
+            "34": 0
+          },
+          "Branches": []
+        },
+        "System.String MECS.Core.Domain.Entities.BaseEntity::ToString()": {
+          "Lines": {
+            "36": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\miike\\source\\repos\\MyECommerceSample\\src\\building blocks\\MECS.Core\\Domain\\Entities\\Product.cs": {
+      "MECS.Core.Domain.Entities.Product": {
+        "System.String MECS.Core.Domain.Entities.Product::get_Name()": {
+          "Lines": {
+            "9": 0
+          },
+          "Branches": []
+        },
+        "System.String MECS.Core.Domain.Entities.Product::get_Description()": {
+          "Lines": {
+            "10": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean MECS.Core.Domain.Entities.Product::get_IsActive()": {
+          "Lines": {
+            "11": 0
+          },
+          "Branches": []
+        },
+        "System.Decimal MECS.Core.Domain.Entities.Product::get_Price()": {
+          "Lines": {
+            "12": 0
+          },
+          "Branches": []
+        },
+        "System.DateTime MECS.Core.Domain.Entities.Product::get_LastRegister()": {
+          "Lines": {
+            "13": 0
+          },
+          "Branches": []
+        },
+        "System.String MECS.Core.Domain.Entities.Product::get_Image()": {
+          "Lines": {
+            "14": 0
+          },
+          "Branches": []
+        },
+        "System.Int32 MECS.Core.Domain.Entities.Product::get_Stock()": {
+          "Lines": {
+            "15": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean MECS.Core.Domain.Entities.Product::IsValid()": {
+          "Lines": {
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0
+          },
+          "Branches": []
+        }
+      }
+    },
+    "C:\\Users\\miike\\source\\repos\\MyECommerceSample\\src\\building blocks\\MECS.Core\\Domain\\Entities\\User.cs": {
+      "MECS.Core.Domain.Entities.SignUpUser": {
+        "System.String MECS.Core.Domain.Entities.SignUpUser::get_Email()": {
+          "Lines": {
+            "14": 0
+          },
+          "Branches": []
+        },
+        "System.String MECS.Core.Domain.Entities.SignUpUser::get_Password()": {
+          "Lines": {
+            "15": 0
+          },
+          "Branches": []
+        },
+        "System.String MECS.Core.Domain.Entities.SignUpUser::get_ConfirmPassword()": {
+          "Lines": {
+            "16": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean MECS.Core.Domain.Entities.SignUpUser::IsValid()": {
+          "Lines": {
+            "18": 0,
+            "19": 0,
+            "20": 0,
+            "21": 0
+          },
+          "Branches": []
+        },
+        "System.Void MECS.Core.Domain.Entities.SignUpUser::.ctor(System.String,System.String,System.String)": {
+          "Lines": {
+            "7": 0,
+            "8": 0,
+            "9": 0,
+            "10": 0,
+            "11": 0,
+            "12": 0
+          },
+          "Branches": []
+        }
+      },
+      "MECS.Core.Domain.Entities.SignInUser": {
+        "System.String MECS.Core.Domain.Entities.SignInUser::get_Email()": {
+          "Lines": {
+            "31": 0
+          },
+          "Branches": []
+        },
+        "System.String MECS.Core.Domain.Entities.SignInUser::get_Password()": {
+          "Lines": {
+            "32": 0
+          },
+          "Branches": []
+        },
+        "System.Boolean MECS.Core.Domain.Entities.SignInUser::IsValid()": {
+          "Lines": {
+            "34": 0,
+            "35": 0,
+            "36": 0,
+            "37": 0
+          },
+          "Branches": []
+        },
+        "System.Void MECS.Core.Domain.Entities.SignInUser::.ctor(System.String,System.String)": {
+          "Lines": {
+            "26": 0,
+            "27": 0,
+            "28": 0,
+            "29": 0,
+            "30": 0
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}

@@ -6,13 +6,13 @@ namespace MECS.Core.Domain.Entities
 {
     public class Product : BaseEntity, IAggregateRoot
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public bool IsActive { get; set; }
-        public decimal Price { get; set; }
-        public DateTime LastRegister { get; set; }
-        public string Image { get; set; }
-        public int Stock { get; set; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public bool IsActive { get; private set; }
+        public decimal Price { get; private set; }
+        public DateTime LastRegister { get; private set; }
+        public string Image { get; private set; }
+        public int Stock { get; private set; }
 
         public override bool IsValid()
         {
