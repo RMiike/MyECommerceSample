@@ -21,6 +21,7 @@
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/RMiike/MyECommerceSample">
     <img src="https://app.codacy.com/project/badge/Grade/daea9fe8ea2348f193d9279f64a5d75b"/>
     <img src="https://www.travis-ci.com/RMiike/MyECommerceSample.svg?branch=master" alt="Build Status" />
+    <img src="https://codecov.io/gh/RMiike/MyECommerceSample/branch/master/graph/badge.svg?token=IlVAl9g4eR"/>
 </p>
 
 
