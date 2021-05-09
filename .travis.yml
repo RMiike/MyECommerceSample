@@ -10,7 +10,6 @@ env:
 script:
   - dotnet build MyECommerceSample.sln -c Release
 
-  - dotnet test --no-build ../MyECommerceSample /p:CollectCoverage=true /p:ExcludeByFile=\"**/Migrations/*.cs,**/Startup.cs,**/Program.cs\"  /p:CoverletOutputFormat=opencover
+  - dotnet test ../MyECommerceSample /p:CollectCoverage=true /p:ExcludeByFile=\"**/Migrations/*.cs,**/Startup.cs,**/Program.cs\"  /p:CoverletOutputFormat=opencover
 after_script:
   - bash <(curl -s https://codecov.io/bash)
-  # -t 528792f8-c73c-477d-a4dc-f1382832f9e9
