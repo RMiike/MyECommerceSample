@@ -8,8 +8,8 @@ env:
   global:
     - DOTNET_CLI_TELEMETRY_OPTOUT: 1
 script:
-  - dotnet build ./MyECommerceSample.sln
+  - dotnet build MyECommerceSample.sln -c Release
 
-  - dotnet test . /p:CollectCoverage=true /p:ExcludeByFile=\"**/Migrations/*.cs,**/Startup.cs,**/Program.cs\"  /p:CoverletOutputFormat=opencover
-  after_script:
-  - bash <(curl -s https://codecov.io/bash) -t 528792f8-c73c-477d-a4dc-f1382832f9e9
+  # - dotnet test  /p:CollectCoverage=true /p:ExcludeByFile=\"**/Migrations/*.cs,**/Startup.cs,**/Program.cs\"  /p:CoverletOutputFormat=opencover
+  # after_script:
+  # - bash <(curl -s https://codecov.io/bash) -t 528792f8-c73c-477d-a4dc-f1382832f9e9
