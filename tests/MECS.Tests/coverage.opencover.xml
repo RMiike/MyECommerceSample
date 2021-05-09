@@ -2,9 +2,9 @@
 <CoverageSession>
   <Summary numSequencePoints="117" visitedSequencePoints="1" numBranchPoints="16" visitedBranchPoints="0" sequenceCoverage="0.85" branchCoverage="0" maxCyclomaticComplexity="48" minCyclomaticComplexity="48" visitedClasses="1" numClasses="9" visitedMethods="1" numMethods="35" />
   <Modules>
-    <Module hash="87811A8F-22A0-406C-A458-A68A866D2B65">
+    <Module hash="2AD3EF08-D81F-4019-99C0-71AFF8CF28F8">
       <ModulePath>MECS.Core.dll</ModulePath>
-      <ModuleTime>2021-05-09T02:58:18</ModuleTime>
+      <ModuleTime>2021-05-09T03:18:20</ModuleTime>
       <ModuleName>MECS.Core</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\Users\miike\source\repos\MyECommerceSample\src\building blocks\MECS.Core\Helpers\GeneralExtensions.cs" />
