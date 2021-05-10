@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using MECS.WebAPI.Core.Identity;
+using MECS.WebAPI.Core.Swagger;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,14 +19,15 @@ namespace MECS.Identity.API.Configuration
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwaggerConfig();
+                var apiName = "Identity";
+                app.UseSwaggerConfiguration(apiName);
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseIdentityConfig();
+            app.UseIdentityConfiguration();
 
             app.UseEndpoints(endpoints =>
             {
