@@ -1,4 +1,5 @@
 ﻿using MECS.Core.Domain.Entities;
+using MECS.WebAPI.Core.Identity;
 using MECS.WebApp.MVC.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,7 +35,7 @@ namespace MECS.WebApp.MVC.Configuration
 
             app.UseRouting();
 
-            app.UseIdentityConfig();
+            app.UseIdentityConfiguration();
             app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseEndpoints(endpoints =>

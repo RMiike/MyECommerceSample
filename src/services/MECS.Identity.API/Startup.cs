@@ -1,4 +1,5 @@
 using MECS.Identity.API.Configuration;
+using MECS.WebAPI.Core.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,8 +31,8 @@ namespace MECS.Identity.API
             services.AddIdentityConfig(Configuration);
 
             services.AddAPIConfig();
-
-            services.AddSwaggerConfig();
+            var apiName = "Identity";
+            services.AddSwaggerConfiguration(apiName, false);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
