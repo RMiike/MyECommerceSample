@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\building blocks\MECS.Core\MECS.Core.csproj" />
+    <ProjectReference Include="..\..\building blocks\MECS.WebAPI.Core\MECS.WebAPI.Core.csproj" />
   </ItemGroup>
 
 </Project>

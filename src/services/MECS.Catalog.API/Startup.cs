@@ -1,9 +1,8 @@
-using MECS.Catalog.API.Data;
-using MECS.Catalog.API.Interfaces;
-using MECS.Catalog.API.Repositories;
+using MECS.Catalog.API.Configurations;
+using MECS.WebAPI.Core.Identity;
+using MECS.WebAPI.Core.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,32 +26,20 @@ namespace MECS.Catalog.API
         }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CatalogContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddAPIConfiguration(Configuration);
 
-            services.AddControllers();
+            services.AddJWTConfiguration(Configuration);
 
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<CatalogContext>();
+            services.AddDependencyInjectionConfiguration();
+
+            var apiName = "Catalog";
+            services.AddSwaggerConfiguration(apiName, true);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseAPIConfiguration(env);
         }
     }
 }

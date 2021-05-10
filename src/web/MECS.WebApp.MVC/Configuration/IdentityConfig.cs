@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MECS.WebApp.MVC.Configuration
@@ -16,10 +15,5 @@ namespace MECS.WebApp.MVC.Configuration
                     });
         }
 
-        public static void UseIdentityConfig(this IApplicationBuilder app)
-        {
-            app.UseAuthentication();
-            app.UseAuthorization();
-        }
     }
 }
