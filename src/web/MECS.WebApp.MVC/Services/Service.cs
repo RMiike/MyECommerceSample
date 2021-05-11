@@ -18,7 +18,7 @@ namespace MECS.WebApp.MVC.Services
         {
             var opt = new JsonSerializerOptions
             {
-                PropertyNameCaseInsensitive = true
+                PropertyNameCaseInsensitive = true 
             };
             return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync(), opt);
         }

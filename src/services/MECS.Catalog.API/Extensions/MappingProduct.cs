@@ -7,11 +7,11 @@ namespace MECS.Catalog.API.Extensions
 {
     public static class MappingProduct
     {
-        public static IEnumerable<ProductsViewModel> ConvertProductToViewModel(this IEnumerable<Product> products)
+        public static IEnumerable<ProductViewModel> ConvertProductToViewModel(this IEnumerable<Product> products)
         {
-            return new List<ProductsViewModel>(
+            return new List<ProductViewModel>(
                 products.Select(product =>
-                new ProductsViewModel
+                new ProductViewModel
                 {
                     Id = product.Id,
                     Description = product.Description,
@@ -23,8 +23,8 @@ namespace MECS.Catalog.API.Extensions
                     Price = product.Price
                 }));
         }
-        public static ProductsViewModel ConvertProductToViewModel(this Product product)
-            => new ProductsViewModel
+        public static ProductViewModel ConvertProductToViewModel(this Product product)
+            => new ProductViewModel
             {
                 Id = product.Id,
                 Description = product.Description,

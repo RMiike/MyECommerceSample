@@ -17,14 +17,14 @@ namespace MECS.Catalog.API.Services
             _repository = repository;
         }
 
-        public async Task<ProductsViewModel> Get(Guid id)
+        public async Task<ProductViewModel> Get(Guid id)
         {
             var product = await _repository.Get(id);
             var viewModel = product.ConvertProductToViewModel();
             return viewModel;
         }
 
-        public async Task<IEnumerable<ProductsViewModel>> Get()
+        public async Task<IEnumerable<ProductViewModel>> Get()
         {
             var products = await _repository.Get();
             var viewModels = products.ConvertProductToViewModel();

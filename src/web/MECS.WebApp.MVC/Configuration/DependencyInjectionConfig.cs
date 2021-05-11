@@ -11,6 +11,7 @@ namespace MECS.WebApp.MVC.Configuration
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddHttpClient<IAuthService, AuthService>();
+            services.AddHttpClient<ICatalogService, CatalogService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUser, AspNetUser>();
 
