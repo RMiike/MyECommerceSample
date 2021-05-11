@@ -2,7 +2,7 @@
 
 namespace MECS.Catalog.API.Models
 {
-    public class ProductsViewModel
+    public class ProductViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

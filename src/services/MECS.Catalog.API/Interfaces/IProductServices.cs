@@ -7,7 +7,7 @@ namespace MECS.Catalog.API.Interfaces
 {
     public interface IProductServices
     {
-        Task<ProductsViewModel> Get(Guid id);
-        Task<IEnumerable<ProductsViewModel>> Get();
+        Task<ProductViewModel> Get(Guid id);
+        Task<IEnumerable<ProductViewModel>> Get();
     }
 }
