@@ -9,6 +9,7 @@ namespace MECS.WebApp.MVC.Controllers
     {
 
         private readonly ICatalogService _service;
+        //private readonly ICatalogServiceRefit _service;
 
         public CatalogController(ICatalogService service)
         {
