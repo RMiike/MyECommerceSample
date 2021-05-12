@@ -29,7 +29,7 @@ namespace MECS.WebApp.MVC
         {
             services.AddIdentityConfig();
             services.AddWebAppConfig(Configuration);
-            services.RegisterServices();
+            services.RegisterServices(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
