@@ -49,7 +49,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MECS.Tests", "tests\MECS.Te
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{3F3243AD-D60B-4292-A856-6CA633A867C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MECS.WebAPI.Core", "src\building blocks\MECS.WebAPI.Core\MECS.WebAPI.Core.csproj", "{45313565-D9E4-465B-9453-6EB5F558D8F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MECS.WebAPI.Core", "src\building blocks\MECS.WebAPI.Core\MECS.WebAPI.Core.csproj", "{45313565-D9E4-465B-9453-6EB5F558D8F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
