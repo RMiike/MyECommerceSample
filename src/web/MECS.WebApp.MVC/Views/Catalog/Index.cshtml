@@ -1,4 +1,5 @@
-﻿@model IEnumerable<MECS.WebApp.MVC.Models.ProductViewModel>
+﻿@using MECS.WebApp.MVC.Extensions
+@model IEnumerable<MECS.WebApp.MVC.Models.ProductViewModel>
 
 @{
   ViewData["Title"] = "Todos os produtos";
@@ -27,11 +28,12 @@
                   </a>
 
                   <small class="card-text">
+                    @this.StockMessage(produto.Stock)<br />
                     @produto.Description
                   </small>
                 </figcaption>
                 <div class="card-footer price mt-1">
-                  <h3>@produto.Price</h3>
+                  <h3>@this.FormatarMoeda(produto.Price)</h3>
                 </div>
               </div>
             </div>

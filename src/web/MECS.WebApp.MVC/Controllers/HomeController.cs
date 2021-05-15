@@ -5,15 +5,16 @@ namespace MECS.WebApp.MVC.Controllers
 {
     public class HomeController : Controller
     {
-
-        public IActionResult Index()
+        [Route("erro/sistema-indisponivel")]
+        public IActionResult SistemaIndisponivel()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            var modelErro = new ErrorViewModel()
+            {
+                Message = "O sistema está temporariamente indisponível. Isso pode ocorrer em momentos de sobrecarga de usuários",
+                Title = "Sistema indisponivel",
+                ErroCode = 500
+            };
+            return View("Error", modelErro);
         }
 
         [Route("erro/{id:length(3,3)}")]
