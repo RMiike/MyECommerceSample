@@ -5,6 +5,8 @@ using MECS.WebApp.MVC.Services.Handlers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Polly;
+using System;
 
 namespace MECS.WebApp.MVC.Configuration
 {
@@ -13,11 +15,14 @@ namespace MECS.WebApp.MVC.Configuration
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
-
             services.AddHttpClient<IAuthService, AuthService>();
-
             services.AddHttpClient<ICatalogService, CatalogService>()
-                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                //.AddTransientHttpErrorPolicy(
+                //    p => p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(500)))
+                .AddPolicyHandler(PollyExtensions.CustomRetryAsync())
+                .AddTransientHttpErrorPolicy(p =>
+                    p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             //services.AddHttpClient("Refit",
             //    opt => { opt.BaseAddress = new Uri(configuration.GetSection("CatalogUrl").Value); })
