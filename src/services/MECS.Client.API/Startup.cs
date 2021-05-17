@@ -1,6 +1,7 @@
 using MECS.Client.API.Configuration;
 using MECS.WebAPI.Core.Identity;
 using MECS.WebAPI.Core.Swagger;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,9 @@ namespace MECS.Client.API
 
             var apiName = "Client";
             services.AddSwaggerConfiguration(apiName, true);
+
+            services.AddMediatR(typeof(Startup));
+
             services.AddDependencyInjectionConfiguration();
         }
 

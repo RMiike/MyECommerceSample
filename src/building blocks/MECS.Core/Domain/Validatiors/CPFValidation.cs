@@ -13,7 +13,7 @@ namespace MECS.Core.Domain.Validatiors
                 .Must(c => ValidarTamanho(c))
                 .Length(CPF_LENGTH)
                 .WithMessage($"CPF deve ter {CPF_LENGTH} caracteres.")
-                .Must(c => ValidarCPFCustomizada(c))
+                .Must(ValidarCPFCustomizada)
                 .WithMessage("CPF inválido.");
         }
         private bool ValidarTamanho(string cpf)

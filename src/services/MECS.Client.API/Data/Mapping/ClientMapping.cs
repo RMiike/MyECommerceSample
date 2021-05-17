@@ -20,7 +20,6 @@ namespace MECS.Client.API.Data.Mapping
             {
                 tf.Property(c => c.Numero)
                 .IsRequired()
-                .HasMaxLength(11)
                 .HasColumnName("CPF")
                 .HasColumnType($"varchar({CPF.CPF_LENGTH})");
 
