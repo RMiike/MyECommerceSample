@@ -15,7 +15,7 @@ namespace MECS.Core.Domain.Validatiors
                 .WithMessage($"Endereço de email deve ter entre {MIN_LENGTH} e {MAX_LENGTH} caracteres.")
                 .EmailAddress()
                 .WithMessage("Digite um email válido.")
-                .Must(e => CustomValidate(e))
+                .Must(CustomValidate)
                 .WithMessage("E-mail inválido");
         }
         private bool CustomValidate(string email)
