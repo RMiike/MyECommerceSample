@@ -18,7 +18,6 @@ namespace MECS.Client.API.Configuration
             services.AddDbContext<ClientContext>(opt =>
                 opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<ClientContext>();
 
             services.AddControllers();
 

@@ -1,5 +1,7 @@
 ﻿using FluentValidation.Results;
 using MECS.Client.API.Application.Commands;
+using MECS.Client.API.Application.Events;
+using MECS.Client.API.Data;
 using MECS.Client.API.Data.Repository;
 using MECS.Client.API.Interfaces;
 using MECS.Core.Data.Mediator;
@@ -14,7 +16,10 @@ namespace MECS.Client.API.Configuration
         {
             services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IRequestHandler<RegisterClientCommand, ValidationResult>, ClientCommandHandler>();
+            services.AddScoped<INotificationHandler<RegisteredClientEvent>, ClientEventHandler>();
             services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<ClientContext>();
+
 
         }
     }
