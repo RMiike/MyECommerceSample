@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MECS.WebApp.MVC.Extensions;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,6 +7,15 @@ namespace MECS.WebApp.MVC.Models
 {
     public class SignUpUserViewModel
     {
+        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+        [DisplayName("Nome Completo")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+        [DisplayName("CPF")]
+        [CPF]
+        public string CPF { get; set; }
+
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
         [EmailAddress(ErrorMessage = "O campo {0} está em formato inválido.")]
         public string Email { get; set; }
