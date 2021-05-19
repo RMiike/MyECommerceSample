@@ -33,7 +33,7 @@ namespace MECS.Client.API
             services.AddJWTConfiguration(Configuration);
 
             var apiName = "Client";
-            services.AddSwaggerConfiguration(apiName, true);
+            services.AddSwaggerConfiguration(apiName, false);
 
             services.AddMediatR(typeof(Startup));
 

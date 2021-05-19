@@ -1,4 +1,6 @@
-﻿using MECS.Core.Data.Interface;
+﻿using MECS.Client.API.Extensions;
+using MECS.Core.Data.Interface;
+using MECS.Core.Data.Mediator;
 using MECS.Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -8,10 +10,13 @@ namespace MECS.Client.API.Data
 {
     public class ClientContext : DbContext, IUnitOfWork
     {
-        public ClientContext(DbContextOptions<ClientContext> opt) : base(opt)
+
+        private readonly IMediatorHandler _mediatorHandler;
+        public ClientContext(DbContextOptions<ClientContext> opt, IMediatorHandler mediatorHandler) : base(opt)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ChangeTracker.AutoDetectChangesEnabled = false;
+            _mediatorHandler = mediatorHandler;
         }
         public DbSet<Core.Domain.Entities.Client> Clients { get; set; }
         public DbSet<Address> Addresses { get; set; }
@@ -29,7 +34,11 @@ namespace MECS.Client.API.Data
         }
         public async Task<bool> Commit()
         {
-            return await base.SaveChangesAsync() > 0;
+            var success = await base.SaveChangesAsync() > 0;
+            if (success)
+                await _mediatorHandler.PublishEvents(this);
+
+            return success;
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using MECS.Core.Domain.Entities;
+﻿using FluentValidation.Results;
+using MECS.Core.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MECS.Identity.API.Controllers
+namespace MECS.WebAPI.Core.Controllers
 {
     [ApiController]
     public abstract class MainController : Controller
@@ -42,6 +43,17 @@ namespace MECS.Identity.API.Controllers
                 AdicionarErroProcessamento(erro);
             }
             var dict = baseEntity.ValidationResult.Errors.ToArray();
+            return CustomResponse();
+        }
+        protected ActionResult CustomResponse(ValidationResult baseEntity)
+        {
+
+            var erros = baseEntity.Errors;
+
+            foreach (var erro in erros)
+            {
+                AdicionarErroProcessamento(erro.ErrorMessage);
+            }
             return CustomResponse();
         }
         protected bool OperacaoValida()

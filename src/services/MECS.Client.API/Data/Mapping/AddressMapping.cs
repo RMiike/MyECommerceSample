@@ -40,6 +40,7 @@ namespace MECS.Client.API.Data.Mapping
 
             builder.Ignore(c => c.ErrorMessages);
             builder.Ignore(c => c.ValidationResult);
+            builder.Ignore(c => c.Notifications);
         }
     }
 }

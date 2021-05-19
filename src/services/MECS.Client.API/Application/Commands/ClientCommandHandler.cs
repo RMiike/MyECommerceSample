@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using MECS.Client.API.Application.Events;
 using MECS.Client.API.Interfaces;
 using MECS.Core.Data.Messages;
 using MediatR;
@@ -35,6 +36,8 @@ namespace MECS.Client.API.Application.Commands
             }
 
             _repository.Adicionar(client);
+
+            client.AddEvent(new RegisteredClientEvent(message.Id, message.Name, message.Email, message.CPF));
 
             return await PersistData(_repository.UnitOfWork);
         }

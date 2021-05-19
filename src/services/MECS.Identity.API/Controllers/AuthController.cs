@@ -2,6 +2,7 @@
 using MECS.Core.Helpers;
 using MECS.Identity.API.Extensions;
 using MECS.Identity.API.Models;
+using MECS.WebAPI.Core.Controllers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
