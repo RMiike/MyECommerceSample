@@ -15,14 +15,14 @@ namespace MECS.Core.Domain.DomainObjects
         public const int CPF_LENGTH = 11;
         public string Numero { get; private set; }
 
-        private bool IsValid(string numero)
+        public static bool IsValid(string numero)
             => ValidarCPFCustomizada(numero);
         public override bool IsValid()
         {
             ValidationResult = new CPFValidation().Validate(this);
             return ValidationResult.IsValid;
         }
-        private bool ValidarCPFCustomizada(string cpf)
+        private static bool ValidarCPFCustomizada(string cpf)
         {
             cpf = cpf.OnlyNumbers(cpf);
 

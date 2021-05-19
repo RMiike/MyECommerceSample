@@ -3,6 +3,7 @@ using MECS.WebApp.MVC.Interfaces;
 using MECS.WebApp.MVC.Services;
 using MECS.WebApp.MVC.Services.Handlers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
@@ -14,6 +15,8 @@ namespace MECS.WebApp.MVC.Configuration
     {
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();
+
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
             services.AddHttpClient<IAuthService, AuthService>();
             services.AddHttpClient<ICatalogService, CatalogService>()
