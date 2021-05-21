@@ -4,6 +4,7 @@ using MECS.Client.API.Application.Events;
 using MECS.Client.API.Data;
 using MECS.Client.API.Data.Repository;
 using MECS.Client.API.Interfaces;
+using MECS.Client.API.Services;
 using MECS.Core.Data.Mediator;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +21,7 @@ namespace MECS.Client.API.Configuration
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ClientContext>();
 
-
+            services.AddHostedService<RegisterClientIntegrationHandler>();
         }
     }
 }

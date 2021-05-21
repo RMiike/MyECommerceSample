@@ -45,7 +45,7 @@ namespace MECS.WebApp.MVC.Controllers
             await SignIn(response);
 
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Catalog");
         }
         [HttpGet]
         [Route("sign-in")]
@@ -74,7 +74,7 @@ namespace MECS.WebApp.MVC.Controllers
             await SignIn(response);
 
             return string.IsNullOrEmpty(returnUrl) ?
-                RedirectToAction("Index", "Home") :
+                RedirectToAction("Index", "Catalog") :
                 LocalRedirect(returnUrl);
         }
         [HttpGet]
@@ -82,7 +82,7 @@ namespace MECS.WebApp.MVC.Controllers
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Catalog");
         }
         private async Task SignIn(SignInUserResponse response)
         {
