@@ -1,4 +1,6 @@
-﻿using MECS.Core.Domain.Entities;
+﻿using EasyNetQ;
+using MECS.Core.Data.Messages.Integration;
+using MECS.Core.Domain.Entities;
 using MECS.Core.Helpers;
 using MECS.Identity.API.Extensions;
 using MECS.Identity.API.Models;
@@ -24,7 +26,7 @@ namespace MECS.Identity.API.Controllers
         private readonly SignInManager<IdentityUser> __signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
-
+        private IBus _bus;
         public AuthController(SignInManager<IdentityUser> signInManager,
                               UserManager<IdentityUser> userManager,
                               IOptions<AppSettings> appSettings)
@@ -51,6 +53,7 @@ namespace MECS.Identity.API.Controllers
 
             if (result.Succeeded)
             {
+                var success = await ClientRegister(signUpUserViewModel);
                 var token = await GenerateJWT(user.Email);
                 return CustomResponse(token);
             }
@@ -60,6 +63,18 @@ namespace MECS.Identity.API.Controllers
                 AdicionarErroProcessamento(erro.Description);
             }
             return CustomResponse();
+        }
+
+        private async Task<ResponseMessage> ClientRegister(SignUpUserViewModel signUpUserViewModel)
+        {
+            var user = await _userManager.FindByEmailAsync(signUpUserViewModel.Email);
+            var registeredUser = new UserRegisteredIntegrationEvent(
+                Guid.Parse(user.Id), signUpUserViewModel.Name, signUpUserViewModel.Email, signUpUserViewModel.CPF);
+
+            _bus = RabbitHutch.CreateBus("host=localhost");
+            var success = await _bus.Rpc.RequestAsync<UserRegisteredIntegrationEvent, ResponseMessage>(registeredUser);
+
+            return success;
         }
 
         [HttpPost("sign-in")]
