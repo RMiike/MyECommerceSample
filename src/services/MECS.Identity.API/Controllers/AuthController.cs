@@ -1,9 +1,9 @@
-﻿using EasyNetQ;
-using MECS.Core.Data.Messages.Integration;
+﻿using MECS.Core.Data.Messages.Integration;
 using MECS.Core.Domain.Entities;
 using MECS.Core.Helpers;
 using MECS.Identity.API.Extensions;
 using MECS.Identity.API.Models;
+using MECS.MessageBus.Bus;
 using MECS.WebAPI.Core.Controllers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -26,14 +26,16 @@ namespace MECS.Identity.API.Controllers
         private readonly SignInManager<IdentityUser> __signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
-        private IBus _bus;
+        private IMessageBus _bus;
         public AuthController(SignInManager<IdentityUser> signInManager,
                               UserManager<IdentityUser> userManager,
-                              IOptions<AppSettings> appSettings)
+                              IOptions<AppSettings> appSettings,
+                              IMessageBus bus)
         {
             __signInManager = signInManager;
             _userManager = userManager;
             _appSettings = appSettings.Value;
+            _bus = bus;
         }
 
         [HttpPost("sign-up")]
@@ -53,9 +55,13 @@ namespace MECS.Identity.API.Controllers
 
             if (result.Succeeded)
             {
-                var success = await ClientRegister(signUpUserViewModel);
-                var token = await GenerateJWT(user.Email);
-                return CustomResponse(token);
+                var clientResult = await ClientRegister(signUpUserViewModel);
+                if (!clientResult.ValidationResult.IsValid)
+                {
+                    await _userManager.DeleteAsync(user);
+                    return CustomResponse(clientResult.ValidationResult);
+                }
+                return CustomResponse(await GenerateJWT(user.Email));
             }
 
             foreach (var erro in result.Errors)
@@ -63,18 +69,6 @@ namespace MECS.Identity.API.Controllers
                 AdicionarErroProcessamento(erro.Description);
             }
             return CustomResponse();
-        }
-
-        private async Task<ResponseMessage> ClientRegister(SignUpUserViewModel signUpUserViewModel)
-        {
-            var user = await _userManager.FindByEmailAsync(signUpUserViewModel.Email);
-            var registeredUser = new UserRegisteredIntegrationEvent(
-                Guid.Parse(user.Id), signUpUserViewModel.Name, signUpUserViewModel.Email, signUpUserViewModel.CPF);
-
-            _bus = RabbitHutch.CreateBus("host=localhost");
-            var success = await _bus.Rpc.RequestAsync<UserRegisteredIntegrationEvent, ResponseMessage>(registeredUser);
-
-            return success;
         }
 
         [HttpPost("sign-in")]
@@ -98,6 +92,24 @@ namespace MECS.Identity.API.Controllers
             }
             AdicionarErroProcessamento("Usuário ou senha incorretos.");
             return CustomResponse();
+        }
+
+        private async Task<ResponseMessage> ClientRegister(SignUpUserViewModel signUpUserViewModel)
+        {
+            var user = await _userManager.FindByEmailAsync(signUpUserViewModel.Email);
+            var registeredUser = new UserRegisteredIntegrationEvent(
+                Guid.Parse(user.Id), signUpUserViewModel.Name, signUpUserViewModel.Email, signUpUserViewModel.CPF);
+
+            try
+            {
+                return await _bus.RequestAsync<UserRegisteredIntegrationEvent, ResponseMessage>(registeredUser);
+
+            }
+            catch (Exception)
+            {
+                await _userManager.DeleteAsync(user);
+                throw;
+            }
         }
         private async Task<SignInUserResponse> GenerateJWT(string email)
         {

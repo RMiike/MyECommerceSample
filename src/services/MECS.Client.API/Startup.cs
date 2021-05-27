@@ -38,6 +38,8 @@ namespace MECS.Client.API
             services.AddMediatR(typeof(Startup));
 
             services.AddDependencyInjectionConfiguration();
+
+            services.AddMessageBusConfig(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
