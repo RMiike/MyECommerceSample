@@ -33,6 +33,8 @@ namespace MECS.Identity.API
             services.AddAPIConfig();
             var apiName = "Identity";
             services.AddSwaggerConfiguration(apiName, false);
+
+            services.AddMessageBusConfig(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
