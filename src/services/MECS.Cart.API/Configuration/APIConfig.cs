@@ -1,4 +1,5 @@
-﻿using MECS.WebAPI.Core.Identity;
+﻿using MECS.Cart.API.Data;
+using MECS.WebAPI.Core.Identity;
 using MECS.WebAPI.Core.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +14,8 @@ namespace MECS.Cart.API.Configuration
     {
         public static void AddAPIConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDbContext<CartContext>(opt =>
+                opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
 
