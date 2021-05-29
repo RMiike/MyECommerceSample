@@ -18,12 +18,12 @@ namespace MECS.Client.API.Controllers
             _mediatorHandler = mediatorHandler;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var result = await _mediatorHandler.SendCommand(
-                new RegisterClientCommand(Guid.NewGuid(), "Renato", "renato@renato.com", "30314299076"));
-            return CustomResponse(result);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> Index()
+        //{
+        //    var result = await _mediatorHandler.SendCommand(
+        //        new RegisterClientCommand(Guid.NewGuid(), "Renato", "renato@renato.com", "30314299076"));
+        //    return CustomResponse(result);
+        //}
     }
 }
