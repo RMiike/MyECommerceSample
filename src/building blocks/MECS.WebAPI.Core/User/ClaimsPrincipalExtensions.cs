@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Claims;
 
-namespace MECS.WebApp.MVC.Extensions
+namespace MECS.WebAPI.Core.User
 {
     public static class ClaimsPrincipalExtensions
     {

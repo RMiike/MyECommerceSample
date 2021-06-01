@@ -1,4 +1,5 @@
-﻿using MECS.WebApp.MVC.Extensions;
+﻿using MECS.WebAPI.Core.User;
+using MECS.WebApp.MVC.Extensions;
 using MECS.WebApp.MVC.Interfaces;
 using MECS.WebApp.MVC.Services;
 using MECS.WebApp.MVC.Services.Handlers;
@@ -34,7 +35,7 @@ namespace MECS.WebApp.MVC.Configuration
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IUser, AspNetUser>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
 
         }
     }

@@ -1,21 +1,23 @@
-﻿using MECS.WebApp.MVC.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace MECS.WebApp.MVC.Extensions
+namespace MECS.WebAPI.Core.User
 {
-    public class AspNetUser : IUser
+    public class AspNetUser : IAspNetUser
     {
+
         private readonly IHttpContextAccessor _accessor;
-        public string Name => _accessor.HttpContext.User.Identity.Name;
+
         public AspNetUser(IHttpContextAccessor accessor)
         {
             _accessor = accessor;
         }
+
+        public string Name => _accessor.HttpContext.User.Identity.Name;
         public Guid GetUserId()
-            => IsAuthenticated() ? Guid.Parse(_accessor.HttpContext.User.GetUserId()) : Guid.Empty;
+              => IsAuthenticated() ? Guid.Parse(_accessor.HttpContext.User.GetUserId()) : Guid.Empty;
         public IEnumerable<Claim> GetClaims()
             => _accessor.HttpContext.User.Claims;
         public string GetUserEmail()

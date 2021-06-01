@@ -8,6 +8,7 @@ using System.Linq;
 namespace MECS.WebAPI.Core.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public abstract class MainController : Controller
     {
         protected ICollection<string> Erros = new List<string>();

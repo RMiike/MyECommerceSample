@@ -19,10 +19,8 @@ using System.Threading.Tasks;
 
 namespace MECS.Identity.API.Controllers
 {
-    [Route("api/identity")]
     public class AuthController : MainController
     {
-
         private readonly SignInManager<IdentityUser> __signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
