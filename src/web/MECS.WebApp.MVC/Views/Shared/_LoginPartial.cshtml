@@ -1,7 +1,7 @@
 ﻿
 @using MECS.WebApp.MVC.Extensions;
-@using MECS.WebApp.MVC.Interfaces
-@inject IUser AppUser
+@using MECS.WebAPI.Core.User
+@inject IAspNetUser AppUser
 
 @if (AppUser.IsAuthenticated())
 {

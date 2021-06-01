@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace MECS.WebApp.MVC.Interfaces
+namespace MECS.WebAPI.Core.User
 {
-    public interface IUser
+    public interface IAspNetUser
     {
         string Name { get; }
         Guid GetUserId();

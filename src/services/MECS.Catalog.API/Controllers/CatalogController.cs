@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MECS.Catalog.API.Controllers
 {
-    [Route("api/catalog/products")]
+
     [Authorize]
     public class CatalogController : MainController
     {
@@ -22,12 +22,12 @@ namespace MECS.Catalog.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("products")]
         public async Task<IEnumerable<ProductViewModel>> Get()
             => await _service.Get();
 
         [ClaimsAuthorize("Catalog", "Read")]
-        [HttpGet("{id}")]
+        [HttpGet("products/{id}")]
         public async Task<ProductViewModel> Get(Guid id)
             => await _service.Get(id);
 

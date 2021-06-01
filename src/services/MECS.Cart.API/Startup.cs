@@ -34,7 +34,7 @@ namespace MECS.Cart.API
             services.AddJWTConfiguration(Configuration);
 
             var apiName = "Cart";
-            services.AddSwaggerConfiguration(apiName, false);
+            services.AddSwaggerConfiguration(apiName, true);
 
             services.AddDependencyInjectionConfiguration();
         }

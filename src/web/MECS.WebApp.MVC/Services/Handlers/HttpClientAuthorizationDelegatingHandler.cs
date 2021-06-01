@@ -1,4 +1,4 @@
-﻿using MECS.WebApp.MVC.Interfaces;
+﻿using MECS.WebAPI.Core.User;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -10,9 +10,9 @@ namespace MECS.WebApp.MVC.Services.Handlers
     public class HttpClientAuthorizationDelegatingHandler : DelegatingHandler
     {
 
-        private readonly IUser _user;
+        private readonly IAspNetUser _user;
 
-        public HttpClientAuthorizationDelegatingHandler(IUser user)
+        public HttpClientAuthorizationDelegatingHandler(IAspNetUser user)
         {
             _user = user;
         }
