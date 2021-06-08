@@ -17,6 +17,8 @@ namespace MECS.Cart.API.Data.Mapping
             builder.HasMany(c => c.Itens)
                 .WithOne(i => i.ClientCart)
                 .HasForeignKey(c => c.IdCart);
+
+            builder.Ignore(c => c.ValidationResult);
         }
     }
 }
