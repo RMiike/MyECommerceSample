@@ -8,6 +8,7 @@
         public string Audience { get; set; }
         public string AuthUrl { get; set; }
         public string CatalogUrl { get; set; }
+        public string CartUrl { get; set; }
     }
 }
 

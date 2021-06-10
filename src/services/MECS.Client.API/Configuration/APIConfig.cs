@@ -36,7 +36,7 @@ namespace MECS.Client.API.Configuration
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                var apiName = "Identity";
+                var apiName = "Client";
                 app.UseSwaggerConfiguration(apiName);
             }
 

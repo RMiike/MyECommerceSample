@@ -23,7 +23,7 @@ namespace MECS.WebAPI.Core.User
         public string GetUserEmail()
             => IsAuthenticated() ? _accessor.HttpContext.User.GetUserEmail() : "";
         public string GetUserToken()
-            => IsAuthenticated() ? _accessor.HttpContext.User.GetUserToken() : "";
+                => IsAuthenticated() ? _accessor.HttpContext.User.GetUserToken() : "";
         public bool HasRole(string role)
             => _accessor.HttpContext.User.IsInRole(role);
         public bool IsAuthenticated()

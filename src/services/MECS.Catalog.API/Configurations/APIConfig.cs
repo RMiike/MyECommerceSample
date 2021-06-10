@@ -35,7 +35,7 @@ namespace MECS.Catalog.API.Configurations
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                var apiName = "Identity";
+                var apiName = "Catalog";
                 app.UseSwaggerConfiguration(apiName);
             }
 

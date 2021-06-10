@@ -15,7 +15,9 @@ namespace MECS.Cart.API.Configuration
         public static void AddAPIConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<CartContext>(opt =>
-                opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+               {
+                   opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+               });
 
             services.AddControllers();
 
@@ -34,7 +36,7 @@ namespace MECS.Cart.API.Configuration
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                var apiName = "Identity";
+                var apiName = "Cart";
                 app.UseSwaggerConfiguration(apiName);
             }
 
