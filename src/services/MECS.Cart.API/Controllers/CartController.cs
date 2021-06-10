@@ -52,7 +52,11 @@ namespace MECS.Cart.API.Controllers
             if (itemCart == null)
                 return CustomResponse();
 
-            cart.UpdateUnit(item, item.Quantity);
+            cart.UpdateUnit(itemCart, item.Quantity);
+            ValidarCarrinho(cart);
+            if (!OperacaoValida())
+                return CustomResponse();
+
             _context.ItensCart.Update(itemCart);
             _context.ClientCart.Update(cart);
 
@@ -69,11 +73,14 @@ namespace MECS.Cart.API.Controllers
             {
                 return CustomResponse();
             }
+            ValidarCarrinho(cart);
+            if (!OperacaoValida())
+                return CustomResponse();
 
             cart.RemoveItem(itemCart);
 
             _context.ItensCart.Remove(itemCart);
-            _context.ClientCart.Remove(cart);
+            _context.ClientCart.Update(cart);
 
             await PersistirDados();
 
@@ -81,21 +88,23 @@ namespace MECS.Cart.API.Controllers
         }
         private async Task<ClientCart> ObterCarrinhoCliente()
         {
-            return await _context.ClientCart
+            var cart = await _context.ClientCart
                             .Include(c => c.Itens)
                             .FirstOrDefaultAsync(c => c.IdClient == _user.GetUserId());
+            return cart;
         }
         private void ManipularNovoCarrinho(ItemCart item)
         {
             var cart = new ClientCart(_user.GetUserId());
             cart.AddItem(item);
+            ValidarCarrinho(cart);
             _context.ClientCart.Add(cart);
         }
         private void ManipularCarrinhoExistente(ClientCart cart, ItemCart item)
         {
             var produtoItemExistente = cart.ItemExists(item);
             cart.AddItem(item);
-
+            ValidarCarrinho(cart);
             if (produtoItemExistente)
             {
                 _context.ItensCart.Update(cart.GetItemByIdProduct(item.IdProduct));

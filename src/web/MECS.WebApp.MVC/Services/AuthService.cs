@@ -20,7 +20,7 @@ namespace MECS.WebApp.MVC.Services
         public async Task<SignInUserResponse> SignIn(SignInUserViewModel signInUserViewModel)
         {
             var loginContent = GetContent(signInUserViewModel);
-            var response = await _httpClient.PostAsync($"/api/identity/sign-in", loginContent);
+            var response = await _httpClient.PostAsync($"/api/auth/sign-in", loginContent);
             if (!TreateErrorsResponse(response))
             {
                 return new SignInUserResponse
@@ -33,7 +33,7 @@ namespace MECS.WebApp.MVC.Services
         public async Task<SignInUserResponse> SignUp(SignUpUserViewModel signUpUserViewModel)
         {
             var registerContent = GetContent(signUpUserViewModel);
-            var response = await _httpClient.PostAsync($"/api/identity/sign-up", registerContent);
+            var response = await _httpClient.PostAsync($"/api/auth/sign-up", registerContent);
             if (!TreateErrorsResponse(response))
             {
                 return new SignInUserResponse

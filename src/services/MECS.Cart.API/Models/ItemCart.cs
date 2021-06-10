@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using System;
+using System.Text.Json.Serialization;
 
 namespace MECS.Cart.API.Models
 {
@@ -16,6 +17,8 @@ namespace MECS.Cart.API.Models
         public decimal Price { get; set; }
         public string Image { get; set; }
         public Guid IdCart { get; set; }
+
+        [JsonIgnore]
         public ClientCart ClientCart { get; set; }
         internal void AssociarCarrinho(Guid idCart)
         {

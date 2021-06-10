@@ -10,11 +10,13 @@ namespace MECS.Cart.API.Data
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ChangeTracker.AutoDetectChangesEnabled = false;
+    
         }
         public DbSet<ItemCart> ItensCart { get; set; }
         public DbSet<ClientCart> ClientCart { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");

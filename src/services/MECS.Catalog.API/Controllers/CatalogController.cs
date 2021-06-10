@@ -1,7 +1,6 @@
 ﻿using MECS.Catalog.API.Interfaces;
 using MECS.Catalog.API.Models;
 using MECS.WebAPI.Core.Controllers;
-using MECS.WebAPI.Core.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -26,7 +25,7 @@ namespace MECS.Catalog.API.Controllers
         public async Task<IEnumerable<ProductViewModel>> Get()
             => await _service.Get();
 
-        [ClaimsAuthorize("Catalog", "Read")]
+        //   [ClaimsAuthorize("Catalog", "Read")]
         [HttpGet("products/{id}")]
         public async Task<ProductViewModel> Get(Guid id)
             => await _service.Get(id);

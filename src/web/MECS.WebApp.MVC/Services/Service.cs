@@ -1,4 +1,5 @@
 ﻿using MECS.WebApp.MVC.Extensions;
+using MECS.WebApp.MVC.Models;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -18,7 +19,7 @@ namespace MECS.WebApp.MVC.Services
         {
             var opt = new JsonSerializerOptions
             {
-                PropertyNameCaseInsensitive = true 
+                PropertyNameCaseInsensitive = true
             };
             return JsonSerializer.Deserialize<T>(await response.Content.ReadAsStringAsync(), opt);
         }
@@ -38,6 +39,10 @@ namespace MECS.WebApp.MVC.Services
             httpResponseMessage.EnsureSuccessStatusCode();
 
             return true;
+        }
+        protected ResponseResult ReturnOk()
+        {
+            return new ResponseResult();
         }
     }
 }

@@ -5,6 +5,15 @@ namespace MECS.WebAPI.Core.User
 {
     public static class ClaimsPrincipalExtensions
     {
+        public static string GetUserId(this ClaimsPrincipal claimsPrincipal)
+        {
+            if (claimsPrincipal == null)
+            {
+                throw new ArgumentException(nameof(claimsPrincipal));
+            }
+            var claim = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier);
+            return claim?.Value;
+        }
         public static string GetUserEmail(this ClaimsPrincipal claimsPrincipal)
         {
             if (claimsPrincipal == null)
@@ -14,15 +23,7 @@ namespace MECS.WebAPI.Core.User
             var claim = claimsPrincipal.FindFirst("email");
             return claim?.Value;
         }
-        public static string GetUserId(this ClaimsPrincipal claimsPrincipal)
-        {
-            if (claimsPrincipal == null)
-            {
-                throw new ArgumentException(nameof(claimsPrincipal));
-            }
-            var claim = claimsPrincipal.FindFirst("sub");
-            return claim?.Value;
-        }
+
         public static string GetUserToken(this ClaimsPrincipal claimsPrincipal)
         {
             if (claimsPrincipal == null)

@@ -23,5 +23,33 @@ namespace MECS.WebApp.MVC.Extensions
 
         public static string FormatarMoeda(this RazorPage page, decimal value)
             => value > 0 ? string.Format(Thread.CurrentThread.CurrentCulture, "{0:C}", value) : "Gratuito";
+        public static string FormatoMoeda(this RazorPage page, decimal valor)
+        {
+            return FormatoMoeda(valor);
+        }
+        private static string FormatoMoeda(decimal valor)
+        {
+            return string.Format(Thread.CurrentThread.CurrentCulture, "{0:C}", valor);
+        }
+
+        public static string UnidadesPorProduto(this RazorPage page, int unidades)
+        {
+            return unidades > 1 ? $"{unidades} unidades" : $"{unidades} unidade";
+        }
+
+        public static string SelectOptionsPorQuantidade(this RazorPage page, int quantidade, int valorSelecionado = 0)
+        {
+            var sb = new StringBuilder();
+            for (var i = 1; i <= quantidade; i++)
+            {
+                var selected = "";
+                if (i == valorSelecionado)
+                    selected = "selected";
+                sb.Append($"<option {selected} value='{i}'>{i}</option>");
+            }
+
+            return sb.ToString();
+        }
+
     }
 }

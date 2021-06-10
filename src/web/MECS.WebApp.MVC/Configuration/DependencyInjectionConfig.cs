@@ -17,9 +17,22 @@ namespace MECS.WebApp.MVC.Configuration
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
+
 
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
-            services.AddHttpClient<IAuthService, AuthService>();
+            services.AddHttpClient<IAuthService, AuthService>()
+                .AddPolicyHandler(PollyExtensions.CustomRetryAsync())
+                .AddTransientHttpErrorPolicy(p =>
+                    p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+
+            services.AddHttpClient<ICartService, CartService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                .AddPolicyHandler(PollyExtensions.CustomRetryAsync())
+                .AddTransientHttpErrorPolicy(p =>
+                    p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+            ;
             services.AddHttpClient<ICatalogService, CatalogService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 //.AddTransientHttpErrorPolicy(
@@ -34,8 +47,7 @@ namespace MECS.WebApp.MVC.Configuration
             //    .AddTypedClient(Refit.RestService.For<ICatalogServiceRefit>);
 
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IAspNetUser, AspNetUser>();
+
 
         }
     }
