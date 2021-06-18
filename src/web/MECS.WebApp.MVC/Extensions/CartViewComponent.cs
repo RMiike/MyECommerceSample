@@ -1,5 +1,4 @@
 ﻿using MECS.WebApp.MVC.Interfaces;
-using MECS.WebApp.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -7,15 +6,15 @@ namespace MECS.WebApp.MVC.Extensions
 {
     public class CartViewComponent : ViewComponent
     {
-        private readonly ICartService _service;
+        private readonly IPurshaseBFFService _service;
 
-        public CartViewComponent(ICartService service)
+        public CartViewComponent(IPurshaseBFFService service)
         {
             _service = service;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await _service.Get() ?? new CartViewModel());
+            return View(await _service.GetQuantity());
         }
     }
 }

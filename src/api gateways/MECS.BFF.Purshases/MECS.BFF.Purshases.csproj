@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>c49d15c3-bc26-479e-969b-afbe5d0100ad</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\building blocks\MECS.Core\MECS.Core.csproj" />
+    <ProjectReference Include="..\..\building blocks\MECS.MessageBus\MECS.MessageBus.csproj" />
+    <ProjectReference Include="..\..\building blocks\MECS.WebAPI.Core\MECS.WebAPI.Core.csproj" />
+  </ItemGroup>
+
+</Project>
