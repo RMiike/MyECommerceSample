@@ -4,9 +4,9 @@ using Polly.Retry;
 using System;
 using System.Net.Http;
 
-namespace MECS.WebApp.MVC.Extensions
+namespace MECS.WebAPI.Core.Extensions
 {
-    public class PollyExtensions
+    public static class PollyExtensions
     {
         public static AsyncRetryPolicy<HttpResponseMessage> CustomRetryAsync()
         {

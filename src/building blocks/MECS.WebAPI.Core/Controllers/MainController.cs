@@ -57,6 +57,21 @@ namespace MECS.WebAPI.Core.Controllers
             }
             return CustomResponse();
         }
+        protected ActionResult CustomResponse(ResponseResult response)
+        {
+            ResponsePossuiErros(response);
+            return CustomResponse();
+        }
+        protected bool ResponsePossuiErros(ResponseResult response)
+        {
+            if (response == null || !response.Errors.Messages.Any())
+                return false;
+
+            foreach (var message in response.Errors.Messages)
+                AdicionarErroProcessamento(message);
+
+            return true;
+        }
         protected bool OperacaoValida()
         {
             return !Erros.Any();

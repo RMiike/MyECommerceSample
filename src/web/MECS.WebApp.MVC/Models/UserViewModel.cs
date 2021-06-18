@@ -1,4 +1,5 @@
-﻿using MECS.WebApp.MVC.Extensions;
+﻿using MECS.Core.Domain.Entities;
+using MECS.WebApp.MVC.Extensions;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;

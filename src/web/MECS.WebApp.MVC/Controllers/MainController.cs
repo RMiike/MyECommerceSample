@@ -1,4 +1,4 @@
-﻿using MECS.WebApp.MVC.Models;
+﻿using MECS.Core.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 

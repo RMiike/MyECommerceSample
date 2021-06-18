@@ -1,34 +1,24 @@
-﻿using MECS.WebAPI.Core.Extensions;
+﻿using MECS.BFF.Purshases.Extensions;
+using MECS.BFF.Purshases.Services;
+using MECS.WebAPI.Core.Extensions;
 using MECS.WebAPI.Core.User;
-using MECS.WebApp.MVC.Extensions;
-using MECS.WebApp.MVC.Interfaces;
-using MECS.WebApp.MVC.Services;
-using MECS.WebApp.MVC.Services.Handlers;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using System;
 
-namespace MECS.WebApp.MVC.Configuration
+namespace MECS.BFF.Purshases.Configuration
 {
     public static class DependencyInjectionConfig
     {
-        public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
+        public static void AddDependencyInjectionConfiguration(this IServiceCollection services)
         {
-            services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IAspNetUser, AspNetUser>();
-
-
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
-            services.AddHttpClient<IAuthService, AuthService>()
-                .AddPolicyHandler(PollyExtensions.CustomRetryAsync())
-                .AddTransientHttpErrorPolicy(p =>
-                    p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
-            services.AddHttpClient<IPurshaseBFFService, PurshaseBFFService>()
+
+            services.AddHttpClient<ICartService, CartService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.CustomRetryAsync())
                 .AddTransientHttpErrorPolicy(p =>
@@ -41,14 +31,6 @@ namespace MECS.WebApp.MVC.Configuration
                 .AddPolicyHandler(PollyExtensions.CustomRetryAsync())
                 .AddTransientHttpErrorPolicy(p =>
                     p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
-
-            //services.AddHttpClient("Refit",
-            //    opt => { opt.BaseAddress = new Uri(configuration.GetSection("CatalogUrl").Value); })
-            //    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
-            //    .AddTypedClient(Refit.RestService.For<ICatalogServiceRefit>);
-
-
-
 
         }
     }
