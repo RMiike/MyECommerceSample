@@ -10,9 +10,10 @@ namespace MECS.Client.API.Data
 {
     public class ClientContext : DbContext, IUnitOfWork
     {
-
         private readonly IMediatorHandler _mediatorHandler;
-        public ClientContext(DbContextOptions<ClientContext> opt, IMediatorHandler mediatorHandler) : base(opt)
+        public ClientContext(
+            DbContextOptions<ClientContext> opt, 
+            IMediatorHandler mediatorHandler) : base(opt)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ChangeTracker.AutoDetectChangesEnabled = false;
