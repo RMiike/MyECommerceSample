@@ -1,4 +1,4 @@
-﻿using MECS.Catalog.API.Data;
+﻿using MECS.Order.Infra.Data;
 using MECS.WebAPI.Core.Identity;
 using MECS.WebAPI.Core.Swagger;
 using Microsoft.AspNetCore.Builder;
@@ -8,14 +8,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace MECS.Catalog.API.Configurations
+namespace MECS.Order.API.Configuration
 {
     public static class APIConfig
     {
         public static void AddAPIConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
 
-            services.AddDbContext<CatalogContext>(opt => 
+            services.AddDbContext<OrderContext>(opt =>
                 opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
@@ -35,7 +35,7 @@ namespace MECS.Catalog.API.Configurations
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                var apiName = "Catalog";
+                var apiName = "Order";
                 app.UseSwaggerConfiguration(apiName);
             }
 
