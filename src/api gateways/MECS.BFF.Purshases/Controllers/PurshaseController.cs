@@ -16,13 +16,16 @@ namespace MECS.BFF.Purshases.Controllers
 
         private readonly ICartService _cartService;
         private readonly ICatalogService _catalogService;
+        private readonly IOrderService _orderService;
 
         public PurshaseController(
             ICartService cartService,
-            ICatalogService catalogService)
+            ICatalogService catalogService,
+            IOrderService orderService)
         {
             _cartService = cartService;
             _catalogService = catalogService;
+            _orderService = orderService;
         }
 
         [HttpGet]
@@ -57,6 +60,7 @@ namespace MECS.BFF.Purshases.Controllers
 
             return CustomResponse(response);
         }
+ 
         [HttpPut]
         [Route("cart/itens/{idProduct}")]
         public async Task<IActionResult> UpdateItemToCart(Guid idProduct, ItemCartDTO itemCart)
@@ -83,6 +87,20 @@ namespace MECS.BFF.Purshases.Controllers
             }
             var response = await _cartService.RemoveItem(idProduct);
 
+            return CustomResponse(response);
+        }
+      
+        [HttpPost]
+        [Route("cart/add-voucher")]
+        public async Task<IActionResult> AddVoucher([FromBody] string voucherCode)
+        {
+            var voucher = await _orderService.GetVoucherByCode(voucherCode);
+            if(voucher is null)
+            {
+                AdicionarErroProcessamento("Voucher inválido ou não encontrado.");
+                return CustomResponse();
+            }
+            var response = await _cartService.AddVoucherToCart(voucher);
             return CustomResponse(response);
         }
         private async Task ValidateItemCart(ItemProductDTO product, int quantity)

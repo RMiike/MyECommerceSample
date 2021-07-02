@@ -1,38 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-
+﻿using MECS.Order.API.Application.DTO;
+using MECS.Order.API.Application.Queries;
+using MECS.WebAPI.Core.Controllers;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace MECS.Order.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class VoucherController : ControllerBase
+    [Authorize]
+    public class VoucherController : MainController
     {
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IVoucherQueries _voucherQueries;
+        public VoucherController(IVoucherQueries voucherQueries)
         {
-            return new string[] { "value1", "value2" };
+            _voucherQueries = voucherQueries;
+        }
+        [HttpGet("{code}")]
+        [ProducesResponseType(typeof(VoucherDTO), (int) HttpStatusCode.OK)]
+        [ProducesResponseType((int) HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetByCode(string code)
+        {
+            if (string.IsNullOrEmpty(code))
+                return NotFound();
+
+            var voucher = await _voucherQueries.GetVoucherByCode(code);
+
+            return voucher == null ? NotFound() : CustomResponse(voucher);
         }
 
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

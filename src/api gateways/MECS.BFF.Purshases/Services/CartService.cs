@@ -14,6 +14,7 @@ namespace MECS.BFF.Purshases.Services
         Task<ResponseResult> AddItem(ItemCartDTO product);
         Task<ResponseResult> UpdateItem(Guid idProduct, ItemCartDTO model);
         Task<ResponseResult> RemoveItem(Guid idProduct);
+        Task<ResponseResult> AddVoucherToCart(VoucherDTO voucher);
     }
     public class CartService : Service, ICartService
     {
@@ -65,6 +66,16 @@ namespace MECS.BFF.Purshases.Services
             return ReturnOk();
         }
 
+        public async Task<ResponseResult> AddVoucherToCart(VoucherDTO voucher)
+        {
+            var itemContent = GetContent(voucher);
+            var response = await _httpClient.PostAsync($"/api/cart/add-voucher", itemContent);
 
+            if (!TreateErrorsResponse(response))
+                return await DeserializeObjectResponse<ResponseResult>(response);
+
+            return ReturnOk();
+
+        }
     }
 }
