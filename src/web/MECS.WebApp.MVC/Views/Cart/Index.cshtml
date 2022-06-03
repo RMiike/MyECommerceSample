@@ -98,18 +98,15 @@
                 <a asp-controller="Catalog" asp-action="Index" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continuar Comprando </a>
               </div>
             </div>
-
-
           </main>
           <aside class="col-md-3">
             <div class="card mb-3">
               <div class="card-body">
-                <form asp-action="AplicarVoucher">
+                <form asp-action="AddVoucher">
                   <div class="form-group">
                     <label>Possui um Voucher?</label>
-
                     <div class="input-group">
-                      <input type="text" class="form-control" name="VoucherCodigo" id="VoucherCodigo" value="" placeholder="Voucher Desconto">
+                      <input type="text" class="form-control" name="VoucherCodigo" id="VoucherCodigo" value="@Model.Voucher?.Codigo" placeholder="Voucher Desconto">
                       <span class="input-group-append">
                         <button type="submit" class="btn btn-primary">Aplicar</button>
                       </span>
@@ -120,15 +117,19 @@
             </div>
             <div class="card">
               <div class="card-body">
-
-                <dl class="dlist-align">
-                  <dt>Valor original:</dt>
-                  <dd class="text-right">@this.FormatoMoeda(Model.Total)</dd>
-                </dl>
-                <dl class="dlist-align" style="color:green">
-                  <dt>Desconto:</dt>
-                  <dd class="text-right">22</dd>
-                </dl>
+                @{
+                  if (Model.IsUsedVoucher)
+                  {
+                    <dl class="dlist-align">
+                      <dt>Valor original:</dt>
+                      <dd class="text-right">@this.FormatoMoeda(Model.Total + Model.Descount)</dd>
+                    </dl>
+                    <dl class="dlist-align" style="color:green">
+                      <dt>Desconto:</dt>
+                      <dd class="text-right">@this.FormatoMoeda(Model.Descount)</dd>
+                    </dl>
+                  }
+                }
                 <dl class="dlist-align">
                   <dt>Total:</dt>
                   <dd class="text-right  h5">

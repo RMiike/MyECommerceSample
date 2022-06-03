@@ -23,11 +23,17 @@ namespace MECS.BFF.Purshases.Configuration
                 .AddPolicyHandler(PollyExtensions.CustomRetryAsync())
                 .AddTransientHttpErrorPolicy(p =>
                     p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
-            ;
+
             services.AddHttpClient<ICatalogService, CatalogService>()
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 //.AddTransientHttpErrorPolicy(
                 //    p => p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(500)))
+                .AddPolicyHandler(PollyExtensions.CustomRetryAsync())
+                .AddTransientHttpErrorPolicy(p =>
+                    p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+
+            services.AddHttpClient<IOrderService, OrderService>()
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                 .AddPolicyHandler(PollyExtensions.CustomRetryAsync())
                 .AddTransientHttpErrorPolicy(p =>
                     p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));

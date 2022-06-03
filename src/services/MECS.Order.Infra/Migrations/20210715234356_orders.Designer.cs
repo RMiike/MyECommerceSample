@@ -4,14 +4,16 @@ using MECS.Order.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MECS.Order.Infra.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    partial class OrderContextModelSnapshot : ModelSnapshot
+    [Migration("20210715234356_orders")]
+    partial class orders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,32 +162,25 @@ namespace MECS.Order.Infra.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("Bairro")
-                                .HasColumnType("varchar(100)")
-                                .HasColumnName("Bairro");
+                                .HasColumnType("varchar(100)");
 
                             b1.Property<string>("CEP")
-                                .HasColumnType("varchar(20)")
-                                .HasColumnName("CEP");
+                                .HasColumnType("varchar(20)");
 
                             b1.Property<string>("Cidade")
-                                .HasColumnType("varchar(100)")
-                                .HasColumnName("Cidade");
+                                .HasColumnType("varchar(100)");
 
                             b1.Property<string>("Complemento")
-                                .HasColumnType("varchar(250)")
-                                .HasColumnName("Complemento");
+                                .HasColumnType("varchar(250)");
 
                             b1.Property<string>("Estado")
-                                .HasColumnType("varchar(50)")
-                                .HasColumnName("Estado");
+                                .HasColumnType("varchar(50)");
 
                             b1.Property<string>("Logradouro")
-                                .HasColumnType("varchar(200)")
-                                .HasColumnName("Logradouro");
+                                .HasColumnType("varchar(200)");
 
                             b1.Property<string>("Numero")
-                                .HasColumnType("varchar(50)")
-                                .HasColumnName("Numero");
+                                .HasColumnType("varchar(50)");
 
                             b1.HasKey("OrdersId");
 

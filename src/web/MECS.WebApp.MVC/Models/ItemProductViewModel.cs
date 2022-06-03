@@ -6,6 +6,9 @@ namespace MECS.WebApp.MVC.Models
     public class CartViewModel
     {
         public decimal Total { get; set; }
+        public bool IsUsedVoucher { get; set; }
+        public VoucherViewModel Voucher { get; set; }
+        public decimal Descount { get; set; }
         public List<ItemProductViewModel> Itens { get; set; } = new List<ItemProductViewModel>();
     }
 

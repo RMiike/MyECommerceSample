@@ -4,14 +4,16 @@ using MECS.Cart.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MECS.Cart.API.Migrations
 {
     [DbContext(typeof(CartContext))]
-    partial class CartContextModelSnapshot : ModelSnapshot
+    [Migration("20210713215047_Voucher")]
+    partial class Voucher
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

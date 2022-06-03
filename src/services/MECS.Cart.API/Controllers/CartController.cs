@@ -21,11 +21,13 @@ namespace MECS.Cart.API.Controllers
             _user = user;
             _context = context;
         }
+
         [HttpGet]
         public async Task<ClientCart> Get()
         {
             return await ObterCarrinhoCliente() ?? new ClientCart();
         }
+
         [HttpPost]
         public async Task<IActionResult> Post(ItemCart item)
         {
@@ -42,6 +44,7 @@ namespace MECS.Cart.API.Controllers
 
             return CustomResponse();
         }
+
         [HttpPut("{idProduct}")]
         public async Task<IActionResult> Put(Guid idProduct, ItemCart item)
         {
@@ -64,6 +67,7 @@ namespace MECS.Cart.API.Controllers
 
             return CustomResponse();
         }
+
         [HttpDelete("{idProduct}")]
         public async Task<IActionResult> Delete(Guid idProduct)
         {
@@ -83,6 +87,22 @@ namespace MECS.Cart.API.Controllers
             _context.ClientCart.Update(cart);
 
             await PersistirDados();
+
+            return CustomResponse();
+        }
+
+        [HttpPost("add-voucher")]
+        public async Task<IActionResult> AddVoucher(Voucher voucher)
+        {
+            var cart = await ObterCarrinhoCliente();
+
+            cart.AddVoucher(voucher);
+
+            _context.ClientCart.Update(cart);
+
+            var result = await _context.SaveChangesAsync();
+            if (result <= 0)
+                AdicionarErroProcessamento("Não foi possível persistir os dados no banco");
 
             return CustomResponse();
         }
@@ -153,6 +173,5 @@ namespace MECS.Cart.API.Controllers
             cart.ValidationResult.Errors.ToList().ForEach(e => AdicionarErroProcessamento(e.ErrorMessage));
             return false;
         }
-
     }
 }

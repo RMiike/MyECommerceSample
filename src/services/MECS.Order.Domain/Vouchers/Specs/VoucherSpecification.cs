@@ -25,4 +25,18 @@ namespace MECS.Order.Domain.Vouchers.Specs
             return voucher => voucher.Ativo;
         }
     }
+    public class VoucherValidation : SpecValidator<Voucher>
+    {
+        public VoucherValidation()
+        {
+            var dataSpec = new VoucherDataSpecification();
+            var qtSpec = new VoucherQuantitySpecification();
+            var ativoSpec = new VoucherAtivoSpecification();
+
+
+            Add("dataSpec", new Rule<Voucher>(dataSpec, "Voucher expirado."));
+            Add("qtSpec", new Rule<Voucher>(qtSpec, "Voucher já utilizado."));
+            Add("ativoSpec", new Rule<Voucher>(ativoSpec, "Voucher não está mais ativo."));
+        }
+    }
 }

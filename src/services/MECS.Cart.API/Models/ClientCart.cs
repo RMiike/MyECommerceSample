@@ -20,9 +20,39 @@ namespace MECS.Cart.API.Models
         public decimal Total { get; set; }
         public List<ItemCart> Itens { get; set; } = new List<ItemCart>();
         public ValidationResult ValidationResult { get; set; }
+        public bool IsUsedVoucher { get; set; }
+        public decimal Descount { get; set; }
+        public Voucher Voucher { get; set; }
         internal void CalcularValorCarrinho()
         {
             Total = Itens.Sum(p => p.CalcularValor());
+            CalcularValorTotalDesconto();
+        }
+        internal  void CalcularValorTotalDesconto()
+        {
+            if (!IsUsedVoucher)
+                return;
+            decimal desconto = 0;
+            var valor = Total;
+            if(Voucher.TipoDesconto == TipoDescontoVoucher.Porcentagem)
+            {
+                if (Voucher.Percentual.HasValue)
+                {
+                    desconto = (valor * Voucher.Percentual.Value) / 100;
+                    valor -= desconto;
+                }
+            }
+            else
+            {
+                if (Voucher.ValorDesconto.HasValue)
+                {
+                    desconto = Voucher.ValorDesconto.Value;
+                    valor -= desconto;
+                }
+            }
+
+            Total = valor < 0 ? 0 : valor;
+            Descount = desconto;
         }
         internal bool ItemExists(ItemCart item)
         {
@@ -77,7 +107,12 @@ namespace MECS.Cart.API.Models
             CalcularValorCarrinho();
 
         }
-
+        public void AddVoucher(Voucher voucher)
+        {
+            Voucher = voucher;
+            IsUsedVoucher = true;
+            CalcularValorCarrinho();
+        }
         internal bool IsValid()
         {
             var erros = Itens.SelectMany(i => new ItemCart.ItemValidation().Validate(i).Errors).ToList();

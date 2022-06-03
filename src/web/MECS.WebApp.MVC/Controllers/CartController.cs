@@ -58,5 +58,17 @@ namespace MECS.WebApp.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        [Route("cart/add-voucher")]
+        public async Task<IActionResult> AddVoucher(string voucherCodigo)
+        {
+            var response = await _purshaseBFFService.AddVoucher(voucherCodigo);
+
+            if (ResponseHaveErrors(response))
+                return View("Index", await _purshaseBFFService.Get());
+
+            return RedirectToAction("Index");
+        }
     }
 }

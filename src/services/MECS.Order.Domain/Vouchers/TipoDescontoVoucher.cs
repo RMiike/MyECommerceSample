@@ -1,8 +1,8 @@
 ﻿namespace MECS.Order.Domain.Vouchers
 {
-    public enum TypeDescountVoucher
+    public enum TipoDescontoVoucher
     {
         Porcentagem = 0,
         Valor = 1
-    }
+    } 
 }

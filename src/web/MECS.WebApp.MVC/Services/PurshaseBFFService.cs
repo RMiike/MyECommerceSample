@@ -31,7 +31,6 @@ namespace MECS.WebApp.MVC.Services
                 return await DeserializeObjectResponse<ResponseResult>(response);
             return ReturnOk();
         }
-
         public async Task<ResponseResult> UpdateItem(Guid idProduct, ItemProductViewModel model)
         {
             var item = GetContent(model);
@@ -47,12 +46,20 @@ namespace MECS.WebApp.MVC.Services
                 return await DeserializeObjectResponse<ResponseResult>(response);
             return ReturnOk();
         }
-
         public async Task<int> GetQuantity()
         {
             var response = await _httpClient.GetAsync("/api/purshase/cart-quantity/");
             TreateErrorsResponse(response);
             return await DeserializeObjectResponse<int>(response);
+        }
+        public async Task<ResponseResult> AddVoucher(string voucher)
+        {
+            var itemContent = GetContent(voucher);
+            var response = await _httpClient.PostAsync("/api/purshase/cart/add-voucher/", itemContent);
+            if (!TreateErrorsResponse(response))
+                return await DeserializeObjectResponse<ResponseResult>(response);
+
+            return ReturnOk();
         }
     }
 }

@@ -6,5 +6,6 @@ namespace MECS.Order.Domain.Vouchers
     public interface IVoucherRepository : IRepository<Voucher>
     {
         Task<Voucher> ObterVoucherPorCodigo(string codigo);
+        void Update(Voucher voucher);
     }
 }
